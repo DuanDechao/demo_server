@@ -8,5 +8,9 @@ class SpawnPoint(shyloo.Base, GameObject):
 		shyloo.Base.__init__(self)
 		GameObject.__init__(self)
 		self.createCellEntity(self.createToCell)
+	
+	def callRPCTest(self, index):
+		print("BASE call Rpc.... ", index)
+		self.cell.onCallRPCTest(index)
 		
 

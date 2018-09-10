@@ -25,6 +25,9 @@ class Account(KBEngine.Proxy):
 		exposed.
 		客户端请求查询角色列表
 		"""
+		info = TAvatarInfos()
+		info.extend([23422, 'fancy', 1, 1, TAvatarData().createFromDict({"param1" : 1, "param2" :b'1'})])
+		self.characters[23422] = info
 		DEBUG_MSG("Account[%i].reqAvatarList: size=%i." % (self.id, len(self.characters)))
 		self.client.onReqAvatarList(self.characters)
 				

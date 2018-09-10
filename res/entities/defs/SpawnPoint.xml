@@ -22,12 +22,18 @@
 	</Properties>
 
 	<BaseMethods>
+		<callRPCTest>
+			<Arg>  INT32 </Arg>
+		</callRPCTest>
 	</BaseMethods>
 
 	<CellMethods>
 		<onEntityDestroyed>
 			<Arg>				ENTITY_NO		</Arg>
 		</onEntityDestroyed>
+		<onCallRPCTest>
+			<Arg>	INT32		</Arg>
+		</onCallRPCTest>
 	</CellMethods>
 </root>
 

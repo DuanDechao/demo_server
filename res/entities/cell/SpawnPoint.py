@@ -9,7 +9,8 @@ class SpawnPoint(shyloo.Entity, GameObject):
 	def __init__(self):
 		shyloo.Entity.__init__(self)
 		self.addTimer(1, 0, "onTimer", SCDefine.TIMER_TYPE_SPAWN)
-		
+		#self.addTimer(3, 0, "onRPCTest", 1)
+
 	def spawnTimer(self):
 		datas = d_entities.datas.get(self.spawnEntityNO)
 		
@@ -28,8 +29,16 @@ class SpawnPoint(shyloo.Entity, GameObject):
 			"name" : datas["name"],
 			"descr" : datas.get("descr", ''),
 		}
-		
+		print("------------------------------------------------------------------------------", datas['entityType'], self.spaceID)	
 		e = shyloo.createEntity(datas["entityType"], self.spaceID, tuple(self.position), tuple(self.direction), params)
+	
+	def onRPCTest(self, tid, userArg):
+		idx = userArg
+		self.base.cell.onCallRPCTest(idx)
+	
+	def onCallRPCTest(self, index):
+		print("CELL call rpc test back...", index)
+		self.addTimer(3, 0, "onRPCTest", index + 1)
 
 	#--------------------------------------------------------------------------------------------
 	#                              Callbacks

@@ -25,6 +25,10 @@ class Account(shyloo.Proxy):
 		exposed.
 		客户端请求查询角色列表
 		"""
+		info = TAvatarInfos()
+		info.extend([342545, 'fancy', 1, 1, TAvatarData().createFromDict({"param1" : 1, "param2" :b'1'})])
+		self.characters[342545] = info
+		print("-----------------")
 		DEBUG_MSG("Account[%i].reqAvatarList: size=%i." % (self.id, len(self.characters)))
 		self.client.onReqAvatarList(self.characters)
 				
@@ -132,7 +136,7 @@ class Account(shyloo.Proxy):
 				# 当角色创建好之后，account会调用giveClientTo将客户端控制权（可理解为网络连接与某个实体的绑定）切换到Avatar身上，
 				# 之后客户端各种输入输出都通过服务器上这个Avatar来代理，任何proxy实体获得控制权都会调用onClientEnabled
 				# Avatar继承了Teleport，Teleport.onClientEnabled会将玩家创建在具体的场景中
-				shyloo.createEntityFromDBID("Avatar", dbid, self.__onAvatarCreated)
+				shyloo.createBaseLocallyFromDB("Avatar", dbid, self.__onAvatarCreated)
 			else:
 				ERROR_MSG("Account[%i]::selectAvatarGame: not found dbid(%i)" % (self.id, dbid))
 		else:
@@ -218,7 +222,6 @@ class Account(shyloo.Proxy):
 		if baseRef is None:
 			ERROR_MSG("Account::__onAvatarCreated:(%i): the character you wanted to created is not exist!" % (self.id))
 			return
-			
 		avatar = shyloo.entities.get(baseRef.id)
 		if avatar is None:
 			ERROR_MSG("Account::__onAvatarCreated:(%i): when character was created, it died as well!" % (self.id))
@@ -231,8 +234,10 @@ class Account(shyloo.Proxy):
 			
 		info = self.characters[dbid]
 		avatar.cellData["modelID"] = d_avatar_inittab.datas[info[2]]["modelID"]
+		avatar.cellData["spaceUType"] = d_avatar_inittab.datas[info[2]]["spaceUType"]
 		avatar.cellData["modelScale"] = d_avatar_inittab.datas[info[2]]["modelScale"]
 		avatar.cellData["moveSpeed"] = d_avatar_inittab.datas[info[2]]["moveSpeed"]
+		print("_onAvatarCreated...............", avatar.cellData, d_avatar_inittab.datas[info[2]]["modelID"], d_avatar_inittab.datas[info[2]]["modelScale"], d_avatar_inittab.datas[info[2]]["moveSpeed"])
 		avatar.accountEntity = self
 		self.activeAvatar = avatar
 		self.giveClientTo(avatar)
