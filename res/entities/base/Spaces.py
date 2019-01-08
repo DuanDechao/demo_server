@@ -14,6 +14,7 @@ class Spaces(shyloo.Base, GameObject):
 	shyloo的space是一个抽象空间的概念，一个空间可以被脚本层视为游戏场景、游戏房间、甚至是一个宇宙。
 	"""
 	def __init__(self):
+		print("dddddssssssssyyyyyyyyyyyyyyyyyy")
 		shyloo.Base.__init__(self)
 		GameObject.__init__(self)
 		
@@ -43,6 +44,7 @@ class Spaces(shyloo.Base, GameObject):
 		"""
 		创建space
 		"""
+		print("dsssssssssssssssssssssssssssssttttttttttt")
 		if len(self._tmpDatas) > 0:
 			spaceUType = self._tmpDatas.pop(0)
 			self._spaceAllocs[spaceUType].init()

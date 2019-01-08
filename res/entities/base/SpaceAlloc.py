@@ -35,6 +35,7 @@ class SpaceAlloc:
 			
 		context = copy.copy(context)
 		spaceData = d_spaces.datas.get(self._utype)
+		DEBUG_MSG("Spaces::createSpace: space %i." % (spaceKey))
 		shyloo.createBaseAnywhere(spaceData["entityType"], \
 											{"spaceUType" : self._utype,	\
 											"spaceKey" : spaceKey,	\

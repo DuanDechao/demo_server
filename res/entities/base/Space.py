@@ -19,6 +19,7 @@ class Space(shyloo.Base, GameObject):
 	def __init__(self):
 		shyloo.Base.__init__(self)
 		GameObject.__init__(self)
+		print("Sapce init..............")
 		self.createInNewSpace(None)
 		
 		self.spaceUTypeB = self.cellData["spaceUType"]

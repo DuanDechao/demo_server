@@ -1,4 +1,5 @@
 <root>
+	<parentFile> server/shyloo_defs.xml </parentFile>
 	<!--
 		个性化服务端配置({assets}/res/server/kbengine.xml)
 
@@ -6,7 +7,7 @@
 		这样的好处是不会破坏引擎的默认设置，在你更新引擎时也不会产生冲突，以及在多个逻辑项目时不会影响到其他的项目设置。
 		详细说明请参考：http://kbengine.org/cn/docs/configuration/kbengine.html
 	-->
-	
+
 	<trace_packet>
 		<debug_type> 0 </debug_type>
 	</trace_packet>
@@ -29,6 +30,12 @@
 	
 	<!-- defined => kbe/res/server/kbengine_defs.xml -->
 	<dbmgr>
+		<mysql>
+			<host> 10.246.52.235 </host>
+			<username> ddc </username>
+			<password> ddc </password>
+			<name> shyloo </name>
+		</mysql>
 		<account_system>
 			<!-- 账号找回密码相关
 				(Account reset password)
